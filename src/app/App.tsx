@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Login } from "./Login";
-import { SoundBoard } from "./SoundBoard";
+import { Login } from "./components/Login";
+import { SoundBoard } from "./components/SoundBoard";
 import "./index.css";
 
 type Sound = {

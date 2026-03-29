@@ -1,7 +1,7 @@
 import { serve } from "bun";
 import { join } from "node:path";
 import { unlink } from "node:fs/promises";
-import index from "./index.html";
+import index from "./app/index.html";
 import {
   createUser, getUserByEmail, createSession, getUserByToken, deleteSession,
   addSound, getAllSounds, getSound, deleteSound,
