@@ -25,6 +25,7 @@ export function App() {
   const [sounds, setSounds] = useState<Sound[]>([]);
   const [log, setLog] = useState<string[]>([]);
   const [voiceToken, setVoiceToken] = useState<string | null>(null);
+  const [livekitUrl, setLivekitUrl] = useState<string>("");
 
   const fetchSounds = useCallback(() => {
     fetch("/api/sounds")
@@ -56,7 +57,8 @@ export function App() {
   useEffect(() => {
     if (!token) return;
 
-    const ws = new WebSocket(`ws://localhost:3000/ws?token=${token}`);
+    const wsProto = window.location.protocol === "https:" ? "wss" : "ws";
+    const ws = new WebSocket(`${wsProto}://${window.location.host}/ws?token=${token}`);
     wsRef.current = ws;
 
     ws.onmessage = (event) => {
@@ -114,6 +116,7 @@ export function App() {
       }
       const data = await res.json();
       setVoiceToken(data.token);
+      setLivekitUrl(data.livekitUrl);
     } catch (err) {
       console.error("Voice join error:", err);
     }
@@ -174,7 +177,7 @@ export function App() {
       {voiceToken ? (
         <VoiceChat
           token={voiceToken}
-          livekitUrl="ws://localhost:7880"
+          livekitUrl={livekitUrl}
           onLeave={handleLeaveVoice}
         />
       ) : (
