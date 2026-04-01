@@ -3,6 +3,7 @@ import index from "./app/index.html";
 import { signup, login, logout, me } from "./routes/auth";
 import { serveSoundFile, handleSounds, handleDeleteSound } from "./routes/sounds";
 import { upgrade } from "./routes/realtime";
+import { token as voiceToken } from "./routes/voice";
 import { websocket } from "./services/realtime";
 import type { WsData } from "./services/realtime";
 
@@ -16,6 +17,7 @@ const server = serve<WsData>({
     "/api/me": me,
     "/api/sounds": handleSounds,
     "/api/sounds/*": handleDeleteSound,
+    "/api/voice/token": voiceToken,
     "/ws": (req, server) => upgrade(req, server),
   },
   websocket,

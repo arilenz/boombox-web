@@ -262,6 +262,101 @@ body {
   background: #444;
 }
 
+/* Voice chat */
+.join-voice-button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid #2ea043;
+  background: transparent;
+  color: #2ea043;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.join-voice-button:hover {
+  background: #2ea043;
+  color: white;
+}
+
+.voice-chat {
+  border: 2px solid #2ea043;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: rgba(46, 160, 67, 0.05);
+}
+
+.voice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.voice-status {
+  font-weight: 600;
+  color: #2ea043;
+  font-size: 0.95em;
+}
+
+.voice-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.voice-button {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  background: #333;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.voice-button:hover {
+  background: #444;
+}
+
+.voice-muted {
+  background: #da3633;
+  color: white;
+}
+
+.voice-muted:hover {
+  background: #f85149;
+}
+
+.voice-leave {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.voice-leave:hover {
+  border-color: #da3633;
+  color: #da3633;
+}
+
+.voice-participants {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.voice-participant {
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.5);
+  background: #2a2a2a;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
 /* Log */
 .log {
   margin-top: 1rem;

@@ -9,6 +9,8 @@
     "start": "NODE_ENV=production bun src/index.ts"
   },
   "dependencies": {
+    "livekit-client": "^2.18.0",
+    "livekit-server-sdk": "^2.15.0",
     "react": "^19",
     "react-dom": "^19"
   },

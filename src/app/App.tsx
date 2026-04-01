@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Login } from "./components/Login";
 import { SoundBoard } from "./components/SoundBoard";
+import { VoiceChat } from "./components/VoiceChat";
 import "./index.css";
 
 type Sound = {
@@ -23,6 +24,7 @@ export function App() {
   );
   const [sounds, setSounds] = useState<Sound[]>([]);
   const [log, setLog] = useState<string[]>([]);
+  const [voiceToken, setVoiceToken] = useState<string | null>(null);
 
   const fetchSounds = useCallback(() => {
     fetch("/api/sounds")
@@ -96,6 +98,31 @@ export function App() {
     setLog([]);
   };
 
+  const handleJoinVoice = async () => {
+    try {
+      const res = await fetch("/api/voice/token", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ room: "main" }),
+      });
+      if (!res.ok) {
+        console.error("Voice token failed:", res.status, await res.text());
+        return;
+      }
+      const data = await res.json();
+      setVoiceToken(data.token);
+    } catch (err) {
+      console.error("Voice join error:", err);
+    }
+  };
+
+  const handleLeaveVoice = () => {
+    setVoiceToken(null);
+  };
+
   const handlePlaySound = (filename: string) => {
     wsRef.current?.send(JSON.stringify({ type: "play", sound: filename }));
   };
@@ -144,6 +171,17 @@ export function App() {
           </button>
         </div>
       </header>
+      {voiceToken ? (
+        <VoiceChat
+          token={voiceToken}
+          livekitUrl="ws://localhost:7880"
+          onLeave={handleLeaveVoice}
+        />
+      ) : (
+        <button className="join-voice-button" onClick={handleJoinVoice}>
+          Join Voice
+        </button>
+      )}
       <SoundBoard
         sounds={sounds}
         currentUser={name}
