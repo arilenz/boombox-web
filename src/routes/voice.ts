@@ -12,6 +12,6 @@ export async function token(req: Request) {
 
   const jwt = await createToken(room, user.name);
   const host = req.headers.get("host")?.split(":")[0] || "localhost";
-  const livekitUrl = `wss://${host}:${LIVEKIT_PORT}`;
+  const livekitUrl = `ws://${host}:${LIVEKIT_PORT}`;
   return Response.json({ token: jwt, livekitUrl });
 }
